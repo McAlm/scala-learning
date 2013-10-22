@@ -1,2 +1,3 @@
 scala-learning
 ==============
+This project contains only scala stuff for learning...
