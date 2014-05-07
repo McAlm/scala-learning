@@ -10,7 +10,7 @@ object sqrt {
       if (isGoodEnough(guess)) guess
       else sqrtIter(improve(guess))
 
-    def isGoodEnough(guess: Double) =
+    def isGoodEnough(guess: Double): Boolean =
       abs(guess * guess - x) / x < 0.000001
 
     def improve(guess: Double) =
