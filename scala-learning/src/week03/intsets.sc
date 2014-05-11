@@ -18,6 +18,7 @@ abstract class IntSet {
   def union(other:IntSet):IntSet
 }
 
+//Object always means Singleton! Creating an instance is not possible
 object Empty extends IntSet {
 
   def contains(x: Int) = false
