@@ -70,6 +70,47 @@ class TweetSetSuite extends FunSuite {
     }
   }
 
+  test("descending: expanded set5") {
+    new TestSets {
+      val tw1 = new Tweet("x", "x body", 35)
+      val tw2 = new Tweet("y", "y body", 258)
+      val tw3 = new Tweet("z", "z body", 11)
+      val set6 = set5.incl(tw1).incl(tw2).incl(tw3)
+      val trends = set6.descendingByRetweet
+      assert(!trends.isEmpty)
+      assert(trends.head.user == "y")
+      assert(trends.tail.head.user == "x")
+    }
+  }
+
+  test("descending: most expanded set5") {
+    println("descending: most expanded set5")
+    val tw_w = new Tweet("w", "w body", 27)
+    val tw_x = new Tweet("x", "x body", 35)
+    val tw_y = new Tweet("y", "y body", 258)
+    val tw_z = new Tweet("z", "z body", 11)
+    val tw_a = new Tweet("a", "a body", 31)
+    val tw_b = new Tweet("b", "b body", 31)
+    val tw_c = new Tweet("c", "c body", 31)
+    val tw_e = new Tweet("e", "e body", 42)
+    val tw_f = new Tweet("f", "f body", 274)
+    val tw_g = new Tweet("g", "g body", 65)
+    val tw_h = new Tweet("h", "h body", 64)
+    val tw_k = new Tweet("k", "k body", 0)
+    val tw_l = new Tweet("l", "l body", 117)
+
+    val firstSet = new Empty
+
+    val setAll = firstSet.incl(tw_w).incl(tw_x).incl(tw_z).incl(tw_a).incl(tw_g).incl(tw_f).incl(tw_l).incl(tw_k).incl(tw_h).incl(tw_b).incl(tw_a).incl(tw_b).incl(tw_y)
+
+    val trends = setAll.descendingByRetweet
+    assert(!trends.isEmpty)
+    assert(trends.head.user == "f")
+    assert(trends.tail.head.user == "y")
+    println("descending: most expanded set5 finish")
+
+  }
+
   test("filterAcc returns empty set for set1") {
     new TestSets {
       def testfunc(tw: Tweet) = tw.user == "a"
@@ -92,6 +133,20 @@ class TweetSetSuite extends FunSuite {
       def testfunc(tw: Tweet) = tw.user == "a" || tw.user == "b" || tw.user == "c" || tw.user == "x"
       val accumulated = set5.filterAcc(testfunc, new Empty)
       assert(size(accumulated) === 3)
+    }
+  }
+
+  test("getMaxRetweets returns 20 for set5") {
+    new TestSets {
+      assert(set5.mostRetweeted.retweets === 20)
+    }
+  }
+
+  test("getMaxRetweets returns 35 for expanded set5") {
+    new TestSets {
+      val maxRetweeted = new Tweet("x", "x body", 35)
+      val set6 = set5.incl(maxRetweeted)
+      assert(set6.mostRetweeted.retweets === 35)
     }
   }
 }
