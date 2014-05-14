@@ -84,7 +84,6 @@ class TweetSetSuite extends FunSuite {
   }
 
   test("descending: most expanded set5") {
-    println("descending: most expanded set5")
     val tw_w = new Tweet("w", "w body", 27)
     val tw_x = new Tweet("x", "x body", 35)
     val tw_y = new Tweet("y", "y body", 258)
@@ -107,7 +106,6 @@ class TweetSetSuite extends FunSuite {
     assert(!trends.isEmpty)
     assert(trends.head.user == "f")
     assert(trends.tail.head.user == "y")
-    println("descending: most expanded set5 finish")
 
   }
 
